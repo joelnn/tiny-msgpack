@@ -2,8 +2,8 @@
 var Codec = require('./lib/codec');
 var EncodeBuffer = require('./lib/encode-buffer');
 var DecodeBuffer = require('./lib/decode-buffer');
-var encode = require('./lib/write-core');
-var decode = require('./lib/read-core');
+var encode = require('./lib/encode');
+var decode = require('./lib/decode');
 
 exports.encode = function (input, codec) {
 	if (!(codec instanceof Codec)) {
