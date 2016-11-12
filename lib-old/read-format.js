@@ -73,10 +73,10 @@ function ext(decoder, len) {
   var end = decoder.offset = start + len + 1;
   if (end > decoder.buffer.length) throw BUFFER_SHORTAGE;
   var type = decoder.buffer[start];
-  var unpack = decoder.codec.getExtUnpacker(type);
-  if (!unpack) throw new Error("Invalid ext type: " + (type ? ("0x" + type.toString(16)) : type));
+  var unpacker = decoder.codec.getUnpacker(type);
+  if (!unpacker) throw new Error("Invalid ext type: " + (type ? ("0x" + type.toString(16)) : type));
   var buf = decoder.buffer.slice(start + 1, end);
-  return unpack(buf);
+  return unpacker(buf);
 }
 
 function uint8(decoder) {
