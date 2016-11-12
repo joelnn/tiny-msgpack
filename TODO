@@ -1,0 +1,6 @@
+rewrite library
+remove lib-old
+rewrite readme
+write benchmarks
+write tests
+publish to npm

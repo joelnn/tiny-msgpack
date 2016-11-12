@@ -1,62 +1,27 @@
 {
-  "name": "msgpack-lite",
-  "description": "Fast Pure JavaScript MessagePack Encoder and Decoder",
-  "version": "0.1.16",
-  "author": "@kawanet",
-  "bin": {
-    "msgpack": "./bin/msgpack"
-  },
-  "browser": "lib/browser.js",
-  "bugs": {
-    "url": "https://github.com/kawanet/msgpack-lite/issues"
-  },
-  "contributors": [
-    "Frederik Dudzik <4004blog@gmail.com>",
-    "Garrett Serack <gserack@gmail.com>",
-    "Jesse Armand <jesse@jessearmand.com>",
-    "Joshua Wise <josh@joshuawise.ninja>"
-  ],
-  "dependencies": {
-    "event-lite": "^0.1.1"
-  },
-  "devDependencies": {
-    "async": "^1.5.2",
-    "browserify": "^13.0.0",
-    "concat-stream": "^1.5.1",
-    "jshint": "^2.9.1",
-    "mocha": "^2.4.5",
-    "msgpack.codec": "git+https://github.com/kawanet/msgpack-javascript.git#msgpack.codec",
-    "uglify-js": "^2.6.1",
-    "zuul": "^3.9.0"
-  },
-  "homepage": "https://github.com/kawanet/msgpack-lite",
-  "jshintConfig": {
-    "es3": true,
-    "globals": {
-      "JSON": true,
-      "Symbol": true,
-      "window": true
-    },
-    "mocha": true,
-    "node": true,
-    "undef": true
-  },
-  "keywords": [
-    "buffer",
-    "fluentd",
-    "messagepack",
-    "msgpack",
-    "serialize",
-    "stream",
-    "typedarray"
-  ],
-  "license": "MIT",
+  "name": "tiny-msgpack",
+  "version": "0.1.26",
+  "description": "A minimalistic MessagePack encoder and decoder for JavaScript.",
   "main": "index.js",
+  "scripts": {
+    "test": "$(npm bin)/mocha"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kawanet/msgpack-lite.git"
+    "url": "https://github.com/JoshuaWise/tiny-msgpack.git"
   },
-  "scripts": {
-    "test": "make test"
-  }
+  "keywords": [
+    "binary",
+    "json",
+    "msgpack",
+    "messagepack",
+    "serialize",
+    "stream"
+  ],
+  "author": "Joshua Wise <joshuathomaswise@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoshuaWise/tiny-msgpack/issues"
+  },
+  "homepage": "https://github.com/JoshuaWise/tiny-msgpack#readme"
 }

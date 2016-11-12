@@ -1,13 +1,24 @@
-// msgpack.js
+'use strict';
+var Codec = require('./lib/codec');
+var EncodeBuffer = require('./lib/encode-buffer');
+var DecodeBuffer = require('./lib/decode-buffer');
+var encode = require('./lib/write-core');
+var decode = require('./lib/read-core');
 
-exports.encode = require("./lib/encode").encode;
-exports.decode = require("./lib/decode").decode;
-
-exports.Encoder = require("./lib/encoder").Encoder;
-exports.Decoder = require("./lib/decoder").Decoder;
-
-exports.createEncodeStream = require("./lib/encode-stream").createEncodeStream;
-exports.createDecodeStream = require("./lib/decode-stream").createDecodeStream;
-
-exports.createCodec = require("./lib/ext").createCodec;
-exports.codec = require("./lib/codec").codec;
+exports.encode = function (input, codec) {
+	if (!(codec instanceof Codec)) {
+		throw new TypeError('Expected second argument to be a Codec.');
+	}
+	var encoder = new EncodeBuffer(codec);
+	encode(encoder, input);
+	return encoder.read();
+};
+exports.decode = function (input, codec) {
+	if (!(codec instanceof Codec)) {
+		throw new TypeError('Expected second argument to be a Codec.');
+	}
+	var decoder = new DecodeBuffer(codec);
+	decoder.append(input);
+	return decode(decoder);
+};
+exports.Codec = Codec;
