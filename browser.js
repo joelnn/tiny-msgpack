@@ -1,7 +1,7 @@
 'use strict';
 module.exports = require('./lib/msgpack');
 
-var toString = Buffer.prototype.toString;
+var decoder = new TextDecoder('utf-8');
 require('./lib/buffer').toString = function (buffer, start, end) {
-	return toString.call(buffer, 'utf8' start, end);
+	return decoder.decode(buffer.subarray(start, end));
 };

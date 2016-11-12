@@ -3,6 +3,7 @@
   "version": "0.1.26",
   "description": "A minimalistic MessagePack encoder and decoder for JavaScript.",
   "main": "index.js",
+  "browser": "browser.js",
   "scripts": {
     "test": "$(npm bin)/mocha"
   },
