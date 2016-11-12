@@ -1,4 +1,4 @@
-rewrite library
+rewrite library, replace Buffer with Uint8Array
 remove lib-old
 rewrite readme
 write benchmarks
