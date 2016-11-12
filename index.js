@@ -14,6 +14,9 @@ exports.encode = function (input, codec) {
 	return encoder.read();
 };
 exports.decode = function (input, codec) {
+	if (!(input instanceof Uint8Array)) {
+		throw new TypeError('Expected first argument to be a Uint8Array.');
+	}
 	if (codec != null && !(codec instanceof Codec)) {
 		throw new TypeError('Expected second argument to be a Codec, if provided.');
 	}
