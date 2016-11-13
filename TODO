@@ -1,4 +1,5 @@
 rewrite encoding (object subtypes), replace Buffer with Uint8Array
+speed up encoding by using if/else instead of hash map for typeof?
 rewrite readme
 write benchmarks
 write tests
