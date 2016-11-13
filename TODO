@@ -1,4 +1,4 @@
-rewrite encoding, replace Buffer with Uint8Array
+rewrite encoding (writeType.string, then object subtypes), replace Buffer with Uint8Array
 rewrite readme
 write benchmarks
 write tests
