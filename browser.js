@@ -1,11 +1,12 @@
 'use strict';
-
+var BufferUtil = require('./lib/buffer-util');
 var decoder = new TextDecoder;
 var encoder = new TextEncoder;
-require('./lib/buffer-util').toString = function (buffer, start, end) {
-	return decoder.decode(buffer.subarray(start, end));
+
+BufferUtil.toString = function (buffer, start, end) {
+	return decoder.decode(BufferUtil.subarray(buffer, start, end));
 };
-require('./lib/buffer-util').fromString = function (string) {
+BufferUtil.fromString = function (string) {
 	return encoder.encode(string);
 };
 
