@@ -1,3 +1,2 @@
-rewrite readme (requires TypedArray support, and TextEncoding/polyfill)
 write tests
 publish to npm
