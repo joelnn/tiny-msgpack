@@ -1,21 +1,52 @@
-# msgpack-lite [![npm version](https://badge.fury.io/js/msgpack-lite.svg)](http://badge.fury.io/js/msgpack-lite) [![Build Status](https://travis-ci.org/kawanet/msgpack-lite.svg?branch=master)](https://travis-ci.org/kawanet/msgpack-lite)
+# tiny-msgpack [![Build Status](https://travis-ci.org/JoshuaWise/tiny-msgpack.svg?branch=master)](https://travis-ci.org/JoshuaWise/tiny-msgpack)
 
-Fast Pure JavaScript MessagePack Encoder and Decoder
+A minimalistic MessagePack encoder and decoder for JavaScript.
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/msgpack-lite.svg)](https://saucelabs.com/u/msgpack-lite)
+- Tiny Size (2.61 kB minified and gzipped)
+- Fast performance (Slightly faster than [msgpack-lite](https://github.com/kawanet/msgpack-lite/))
+- Extension support
+- No other bells or whistles
 
-Online demo: [http://kawanet.github.io/msgpack-lite/](http://kawanet.github.io/msgpack-lite/)
+## Installation
 
-### Features
+```bash
+npm install --save tiny-msgpack
+```
 
-- Pure JavaScript only (No node-gyp nor gcc required)
-- Faster than any other pure JavaScript libraries on node.js v4
-- Even faster than C++ based [msgpack](https://www.npmjs.com/package/msgpack) library (**90% faster** on encoding)
-- Streaming encoding and decoding interface is also available. It's more faster.
-- Ready for [Web browsers](https://saucelabs.com/u/msgpack-lite) including Chrome, Firefox, Safari and even IE8
-- [Tested](https://travis-ci.org/kawanet/msgpack-lite) on Node.js v0.10, v0.12 and v4.2 as well as Web browsers
+## Usage
 
-### Encoding and Decoding MessagePack
+```js
+var msgpack = require('tiny-msgpack');
+
+var uint8array = msgpack.encode({foo: 'bar', baz: 123});
+var object = msgpack.decode(uint8array);
+```
+
+## Extensions
+
+```js
+var msgpack = require('tiny-msgpack');
+var codec = new msgpack.Codec;
+
+function encodeDate(date) {
+  return msgpack.encode(+date);
+}
+function decodeDate(uint8array) {
+  return new Date(msgpack.decode(uint8array));
+}
+codec.register(0x42, Date, encodeDate, decodeDate);
+
+var uint8array = msgpack.encode({timestamp: new Date}, codec);
+var object = msgpack.decode(uint8array, codec);
+console.log(object.timestamp instanceof Date); // => true
+```
+
+## Browser Support
+
+
+
+
+## Encoding and Decoding MessagePack
 
 ```js
 var msgpack = require("msgpack-lite");
