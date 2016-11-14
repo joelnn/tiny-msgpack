@@ -28,6 +28,12 @@ function expectToBeUnderstoodByOfficial(value, expectedBytes) {
 	expect(officialDecode(Buffer.from(encoded))).to.deep.equal(value);
 }
 
+function stringOf(length) {
+	var str = '';
+	while (str.length < length) {str += 'x';}
+	return str;
+}
+
 describe('msgpack.encode()', function () {
 	specify('null', function () {
 		expectToEqualOfficial(null, 1);
@@ -73,6 +79,18 @@ describe('msgpack.encode()', function () {
 		expectToEqualOfficial(0.3, 9);
 		expectToEqualOfficial(-0.3, 9);
 	});
-	
-	
+	specify('string', function () {
+		expectToEqualOfficial('', 1);
+		expectToEqualOfficial('x', 2);
+		expectToEqualOfficial(stringOf(31), 32);
+		expectToEqualOfficial(stringOf(32), 34);
+		expectToEqualOfficial(stringOf(255), 257);
+		expectToEqualOfficial(stringOf(256), 259);
+		expectToEqualOfficial(stringOf(65535), 65538);
+		expectToEqualOfficial(stringOf(65536), 65541);
+	});
+	// binary
+	// array
+	// map
+	// symbol, function
 });
