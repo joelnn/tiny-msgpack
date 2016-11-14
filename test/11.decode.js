@@ -28,6 +28,8 @@ function objectOf(keyCount) {
 }
 
 describe('msgpack.decode()', function () {
+	this.timeout(5000);
+	this.slow(5000);
 	specify('null', function () {
 		expectToDecodeExactly(null);
 	});
