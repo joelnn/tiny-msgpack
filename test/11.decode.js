@@ -1,18 +1,18 @@
 'use strict';
 var encode = require('../.').encode;
 var decode = require('../.').decode;
-var officialDecode = require('msgpack').unpack;
+var referenceDecode = require('msgpack-lite').decode;
 var expect = require('chai').expect;
 
-function expectToDecodeLikeOfficial(value) {
+function expectToDecodeLikeReference(value) {
 	var encoded = encode(value);
-	expect(decode(encoded)).to.deep.equal(officialDecode(Buffer.from(encoded)));
+	expect(decode(encoded)).to.deep.equal(referenceDecode(Buffer.from(encoded)));
 }
 
 function expectToDecodeExactly(value) {
 	var encoded = encode(value);
 	expect(decode(encoded)).to.deep.equal(value);
-	expect(decode(encoded)).to.deep.equal(officialDecode(Buffer.from(encoded)));
+	expect(decode(encoded)).to.deep.equal(referenceDecode(Buffer.from(encoded)));
 }
 
 function stringOf(length) {
@@ -34,7 +34,7 @@ describe('msgpack.decode()', function () {
 		expectToDecodeExactly(null);
 	});
 	specify('undefined', function () {
-		expectToDecodeLikeOfficial(undefined);
+		expectToDecodeLikeReference(undefined);
 	});
 	specify('boolean', function () {
 		expectToDecodeExactly(true);
@@ -88,7 +88,7 @@ describe('msgpack.decode()', function () {
 		function expectToDecodeExactBinary(value) {
 			var encoded = encode(value);
 			expect(decode(encoded)).to.deep.equal(value);
-			var decodedBuffer = officialDecode(Buffer.from(encoded));
+			var decodedBuffer = referenceDecode(Buffer.from(encoded));
 			expect(decode(encoded)).to.deep.equal(new Uint8Array(decodedBuffer.buffer, decodedBuffer.byteOffset, decodedBuffer.length));
 		}
 		expectToDecodeExactBinary(new Uint8Array(0).fill(0x77));
@@ -128,9 +128,9 @@ describe('msgpack.decode()', function () {
 		expectToDecodeExactly(objectOf(65536));
 	});
 	specify('symbol', function () {
-		expectToDecodeLikeOfficial(Symbol());
+		expectToDecodeLikeReference(Symbol());
 	});
 	specify('function', function () {
-		expectToDecodeLikeOfficial(function () {});
+		expectToDecodeLikeReference(function () {});
 	});
 });
