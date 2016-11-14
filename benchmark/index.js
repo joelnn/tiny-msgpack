@@ -3,6 +3,7 @@ var Benchmark = require('benchmark');
 var clc = require('cli-color');
 var tinyMsgpack = require('../.');
 var msgpackLite = require('msgpack-lite');
+var msgpack = require('msgpack');
 Benchmark.options.maxTime = 1;
 var data = {
 	boolean: true,
@@ -25,7 +26,7 @@ var data = {
 var buffers = (function () {
 	var ret = {};
 	for (var key in data) {
-		ret[key] = tinyMsgpack.encode(data[key]);
+		ret[key] = msgpack.pack(data[key]);
 	}
 	return ret;
 }());
