@@ -40,6 +40,15 @@ function objectOf(keyCount) {
 	return obj;
 }
 
+[Array, Uint8Array].forEach(function (Class) {
+	if (typeof Class.prototype.fill !== 'function') {
+		Class.prototype.fill = function (value) {
+			for (var i=0; i<this.length; ++i) {this[i] = value;}
+			return this;
+		};
+	}
+});
+
 describe('msgpack.encode()', function () {
 	this.timeout(5000);
 	this.slow(5000);
@@ -146,7 +155,9 @@ describe('msgpack.encode()', function () {
 		expectToBeUnderstoodByReference(objectOf(65536), 5 + 65536 * 10);
 	});
 	specify('symbol', function () {
-		Buffer.from(encode(Symbol())).equals(Buffer.from(encode(null)));
+		if (typeof Symbol === 'function') {
+			Buffer.from(encode(Symbol())).equals(Buffer.from(encode(null)));
+		}
 	});
 	specify('function', function () {
 		Buffer.from(encode(function () {})).equals(Buffer.from(encode(null)));

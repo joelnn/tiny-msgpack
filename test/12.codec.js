@@ -43,6 +43,6 @@ describe('msgpack.Codec', function () {
 		expect(errs2[0]).to.be.an.instanceof(Error);
 		expect(errs2[1]).to.be.an.instanceof(Error);
 		expect(errs2[2]).to.be.an.instanceof(Error);
-		expect(errs).to.deep.equal(errs2);
+		expect('3' in errs2).to.be.false;
 	});
 });

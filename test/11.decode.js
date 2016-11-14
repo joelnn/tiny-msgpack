@@ -2,6 +2,7 @@
 var encode = require('../.').encode;
 var decode = require('../.').decode;
 var referenceDecode = require('msgpack-lite').decode;
+var util = require('util');
 var expect = require('chai').expect;
 
 function expectToDecodeLikeReference(value) {
@@ -26,6 +27,15 @@ function objectOf(keyCount) {
 	for (var i=0; i<keyCount; ++i) {obj[-1000000 - i] = true;}
 	return obj;
 }
+
+[Array, Uint8Array].forEach(function (Class) {
+	if (typeof Class.prototype.fill !== 'function') {
+		Class.prototype.fill = function (value) {
+			for (var i=0; i<this.length; ++i) {this[i] = value;}
+			return this;
+		};
+	}
+});
 
 describe('msgpack.decode()', function () {
 	this.timeout(5000);
@@ -89,7 +99,9 @@ describe('msgpack.decode()', function () {
 			var encoded = encode(value);
 			expect(decode(encoded)).to.deep.equal(value);
 			var decodedBuffer = referenceDecode(Buffer.from(encoded));
-			expect(decode(encoded)).to.deep.equal(new Uint8Array(decodedBuffer.buffer, decodedBuffer.byteOffset, decodedBuffer.length));
+			if (!decodedBuffer.equals(Buffer.from(decode(encoded)))) {
+				throw new Error(util.format('\nExpected:\n', decodedBuffer, '\nInstead got:\n', Buffer.from(decode(encoded))));
+			}
 		}
 		expectToDecodeExactBinary(new Uint8Array(0).fill(0x77));
 		expectToDecodeExactBinary(new Uint8Array(1).fill(0x77));
@@ -128,7 +140,9 @@ describe('msgpack.decode()', function () {
 		expectToDecodeExactly(objectOf(65536));
 	});
 	specify('symbol', function () {
-		expectToDecodeLikeReference(Symbol());
+		if (typeof Symbol === 'function') {
+			expectToDecodeLikeReference(Symbol());
+		}
 	});
 	specify('function', function () {
 		expectToDecodeLikeReference(function () {});
