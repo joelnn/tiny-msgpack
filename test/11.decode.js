@@ -2,7 +2,6 @@
 var encode = require('../.').encode;
 var decode = require('../.').decode;
 var officialDecode = require('msgpack').unpack;
-var util = require('util');
 var expect = require('chai').expect;
 
 function expectToDecodeLikeOfficial(value) {
