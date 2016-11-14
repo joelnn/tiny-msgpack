@@ -1,5 +1,3 @@
-speed up encoding by using if/else instead of hash map for typeof?
-speed up encoding object maps by using for loop instead of .forEach?
 rewrite readme (requires TypedArray support, and TextEncoding/polyfill)
 write tests
 publish to npm
