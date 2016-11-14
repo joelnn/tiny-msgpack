@@ -5,7 +5,8 @@
   "main": "index.js",
   "browser": "browser.js",
   "scripts": {
-    "test": "$(npm bin)/mocha"
+    "test": "$(npm bin)/mocha",
+    "zuul": "zuul -- test/*.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,8 @@
     "msgpack",
     "messagepack",
     "serialize",
-    "stream"
+    "encode",
+    "decode"
   ],
   "author": "Joshua Wise <joshuathomaswise@gmail.com>",
   "license": "MIT",
