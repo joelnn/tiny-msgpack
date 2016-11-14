@@ -2,7 +2,7 @@
 
 A minimalistic [MessagePack](http://msgpack.org/index.html) encoder and decoder for JavaScript.
 
-- Tiny Size (2.61 kB minified and gzipped)
+- Tiny Size (2.63 kB minified and gzipped)
 - Fast performance (Slightly faster than [msgpack-lite](https://github.com/kawanet/msgpack-lite/))
 - Extension support
 - No other bells or whistles

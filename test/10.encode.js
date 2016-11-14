@@ -34,6 +34,12 @@ function stringOf(length) {
 	return str;
 }
 
+function objectOf(keyCount) {
+	var obj = {};
+	for (var i=0; i<keyCount; ++i) {obj[-1000000 - i] = true;}
+	return obj;
+}
+
 describe('msgpack.encode()', function () {
 	specify('null', function () {
 		expectToEqualOfficial(null, 1);
@@ -89,8 +95,47 @@ describe('msgpack.encode()', function () {
 		expectToEqualOfficial(stringOf(65535), 65538);
 		expectToEqualOfficial(stringOf(65536), 65541);
 	});
-	// binary
-	// array
-	// map
-	// symbol, function
+	specify('binary', function () {
+		expectToEqualOfficial(new Uint8Array(0).fill(0x77), 2);
+		expectToEqualOfficial(new Uint8Array(1).fill(0x77), 3);
+		expectToEqualOfficial(new Uint8Array(31).fill(0x77), 33);
+		expectToEqualOfficial(new Uint8Array(32).fill(0x77), 34);
+		expectToEqualOfficial(new Uint8Array(255).fill(0x77), 257);
+		expectToEqualOfficial(new Uint8Array(256).fill(0x77), 259);
+		expectToEqualOfficial(new Uint8Array(65535).fill(0x77), 65538);
+		expectToEqualOfficial(new Uint8Array(65536).fill(0x77), 65541);
+	});
+	specify('array', function () {
+		expectToEqualOfficial(new Array(0).fill(true), 1);
+		expectToEqualOfficial(new Array(1).fill(true), 2);
+		expectToEqualOfficial(new Array(15).fill(true), 16);
+		expectToEqualOfficial(new Array(16).fill(true), 19);
+		expectToEqualOfficial(new Array(255).fill(true), 258);
+		expectToEqualOfficial(new Array(256).fill(true), 259);
+		expectToEqualOfficial(new Array(65535).fill(true), 65538);
+		expectToEqualOfficial(new Array(65536).fill(true), 65541);
+	});
+	specify('object', function () {
+		expectToEqualOfficial({}, 1);
+		expectToEqualOfficial({0: true}, 3);
+		expectToEqualOfficial({127: true}, 3);
+		expectToEqualOfficial({128: true}, 4);
+		expectToEqualOfficial({255: true}, 4);
+		expectToEqualOfficial({256: true}, 5);
+		expectToEqualOfficial({'-1': true}, 5);
+		expectToEqualOfficial({'0.5': true}, 6);
+		expectToEqualOfficial({'': true}, 3);
+		expectToEqualOfficial({'foo': true}, 6);
+		expectToEqualOfficial({'foo': true}, 6);
+		expectToEqualOfficial(objectOf(15), 1 + 15 * 10);
+		expectToEqualOfficial(objectOf(16), 3 + 16 * 10);
+		expectToEqualOfficial(objectOf(65535), 3 + 65535 * 10);
+		expectToEqualOfficial(objectOf(65536), 5 + 65536 * 10);
+	});
+	specify('symbol', function () {
+		Buffer.from(encode(Symbol())).equals(Buffer.from(encode(null)));
+	});
+	specify('function', function () {
+		Buffer.from(encode(function () {})).equals(Buffer.from(encode(null)));
+	});
 });
