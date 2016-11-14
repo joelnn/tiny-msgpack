@@ -1,6 +1,6 @@
 {
   "name": "tiny-msgpack",
-  "version": "0.1.26",
+  "version": "1.0.0",
   "description": "A minimalistic MessagePack encoder and decoder for JavaScript.",
   "main": "index.js",
   "browser": "browser.js",
