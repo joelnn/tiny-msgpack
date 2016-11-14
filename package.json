@@ -24,5 +24,12 @@
   "bugs": {
     "url": "https://github.com/JoshuaWise/tiny-msgpack/issues"
   },
-  "homepage": "https://github.com/JoshuaWise/tiny-msgpack#readme"
+  "homepage": "https://github.com/JoshuaWise/tiny-msgpack#readme",
+  "devDependencies": {
+    "benchmark": "^2.1.2",
+    "chai": "^3.5.0",
+    "cli-color": "^1.1.0",
+    "mocha": "^3.1.2",
+    "msgpack-lite": "^0.1.26"
+  }
 }

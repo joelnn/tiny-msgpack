@@ -1,9 +1,9 @@
 'use strict';
 var BufferUtil = require('./lib/buffer-util');
-var toString = Buffer.prototype.toString;
 
 BufferUtil.toString = function (buffer, start, end) {
-	return toString.call(buffer, 'utf8', start, end);
+	return Buffer.from(buffer.buffer, buffer.byteOffset, buffer.byteLength)
+		.toString('utf8', start, end);
 };
 BufferUtil.fromString = function (string) {
 	var buffer = Buffer.from(string);
