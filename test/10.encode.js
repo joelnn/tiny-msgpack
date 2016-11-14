@@ -1,8 +1,8 @@
 'use strict';
 var encode = require('../.').encode;
-var util = require('util');
 var officialEncode = require('msgpack').pack;
 var officialDecode = require('msgpack').unpack;
+var util = require('util');
 var expect = require('chai').expect;
 
 function expectToEqualOfficial(value, expectedBytes) {
