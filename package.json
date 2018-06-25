@@ -2,7 +2,7 @@
   "name": "tiny-msgpack",
   "version": "1.0.2",
   "description": "A minimalistic MessagePack encoder and decoder for JavaScript.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "browser": "browser.js",
   "scripts": {
     "test": "$(npm bin)/mocha",
