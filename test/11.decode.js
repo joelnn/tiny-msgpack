@@ -1,6 +1,7 @@
 'use strict';
 var encode = require('../.').encode;
 var decode = require('../.').decode;
+var Float = require('../.').Float;
 var referenceDecode = require('msgpack-lite').decode;
 var util = require('util');
 var Long = require('long');
@@ -99,6 +100,17 @@ describe('msgpack.decode()', function () {
 		expectToDecodeExactly(stringOf(256));
 		expectToDecodeExactly(stringOf(65535));
 		expectToDecodeExactly(stringOf(65536));
+	});
+	specify('float', function () {
+		var expectDecodeForFloat = function (value) {
+			var float = new Float(value);
+			var encoded = encode(float);
+			expect(decode(encoded)).to.equal(float.value);
+		};
+		// 32-bit
+		expectDecodeForFloat(1.0);
+		// 64-bit
+		expectDecodeForFloat(-1.1);
 	});
 	specify('long', function () {
 		expectToDecodeExactlyWithoutReference(Long.fromNumber(Number.MIN_SAFE_INTEGER));

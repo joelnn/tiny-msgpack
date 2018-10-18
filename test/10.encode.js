@@ -1,5 +1,6 @@
 'use strict';
 var encode = require('../.').encode;
+var Float = require('./..').Float;
 var referenceEncode = require('msgpack-lite').encode;
 var referenceDecode = require('msgpack-lite').decode;
 var util = require('util');
@@ -106,6 +107,10 @@ describe('msgpack.encode()', function () {
 		expectToEqualReference(stringOf(256), 259);
 		expectToEqualReference(stringOf(65535), 65538);
 		expectToEqualReference(stringOf(65536), 65541);
+	});
+	specify('float', function () {
+		expectCorrectLength(new Float(1.0), 5);
+		expectCorrectLength(new Float(1.01), 9);
 	});
 	specify('long', function () {
 		expectCorrectLength(Long.fromNumber(0), 1);
