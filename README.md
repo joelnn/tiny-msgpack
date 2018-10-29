@@ -27,12 +27,12 @@ var object = msgpack.decode(uint8array);
 
 ## Typed Numbers
 
-Javascript numbers reqpresent both integer and floating point values. This poses two problems for msgpack:
+Javascript numbers represent both integer and floating point values. This poses two problems for msgpack:
  
 1. integer values > 53 bits cannot be represented
 2. floating point values with whole numbers (ie. 1.0) are indistinguishable from integers, so msgpack treats them as integers
 
-When one is using msgpack to send and receive data with other systems that do not have this limitation, like Python or Java, these limitations can ruin the data being transmitted. `msgpack-with-numbers` provides a way to specify Float and Long values to encode and decode numeric data correctly.
+When one is using msgpack to send and receive data with other systems that do not have this limitation, like Python or Java, these limitations can ruin the data being transmitted. `msgpack-typed-numbers` provides a way to specify Float and Long values to encode and decode numeric data correctly.
 
 ### Floating-Point Numbers
 
