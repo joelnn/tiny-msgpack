@@ -6,7 +6,7 @@ A minimalistic [MessagePack](http://msgpack.org/index.html) encoder and decoder 
 - Fast performance (Slightly faster than [msgpack-lite](https://github.com/kawanet/msgpack-lite/))
 - Supports true 64-bit longs and consistent floating-point values
 - Extension support
-- No other bells or whistles
+- TypeScript definitions
 
 By default, `msgpack` can encode numbers, strings, booleans, nulls, arrays, objects, and binary data (`Uint8Array`). However, additional types can be registered by using [extensions](#extensions).
 

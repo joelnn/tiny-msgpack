@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A minimalistic MessagePack encoder and decoder for JavaScript. Supports typed numbers.",
   "main": "lib/index.js",
-  "types": "lib/tiny-msgpack.d.ts",
+  "types": "lib/index.d.ts",
   "browser": "browser.js",
   "scripts": {
     "test": "$(npm bin)/mocha",
